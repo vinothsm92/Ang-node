@@ -24,12 +24,7 @@ app.use(bodyParser.json());
 // app.use(express.static(__dirname + "/src"));
 // app.set('views', __dirname + '\\src');
 
-app.use(express.static(path.join(__dirname,'dist/MDProject')));
 
-app.use('/',(req,res)=>{
-	
-	res.sendFile(path.join(__dirname,'dist/MDProject/index.html'))
-});
 
 
 app.engine('html', require('ejs').renderFile);
@@ -131,7 +126,12 @@ app.put('/UpdateRoleInfo',isLoggedIn,RoleConfig.UpdateRole)
 
 
 
+app.use(express.static(path.join(__dirname,'dist/MDProject')));
 
+app.use('*',(req,res)=>{
+	
+	res.sendFile(path.join(__dirname,'dist/MDProject/index.html'))
+});
 
 
 
