@@ -1,0 +1,205 @@
+<br>
+
+<div class="card groove">
+  <div class="card-header"> <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">Manage
+      Role</span>
+    <button pButton type="button" icon="pi pi-plus" label="Add Role" class="ui-button-info" (click)="ShowAddRole()"
+      style="margin-right: .25em;float: right"></button></div>
+
+
+  <div class="card-body" style="height: 500px">
+   
+
+      <p-table #dt [columns]="cols" [value]="RoleMasters" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10,20,30]"
+        [scrollable]="true" scrollHeight="400px" sortMode="multiple" (onEdit)="onEdit($event)" (onEditComplete)="onEditComplete($event)">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="text-align:center">
+              {{col.header}}
+              <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+                ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+            </th>
+
+            <th style="text-align:center">
+              Assign UI List
+            </th>
+          </tr>
+          <!-- <tr>
+          <th style="text-align:center" [pSortableColumn]='"RoleName"'>
+            Role Name
+            <p-sortIcon [field]="RoleName" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+          <th style="text-align:center" [pSortableColumn]='"Description"'>
+            Description
+            <p-sortIcon [field]="Description" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+          <th style="text-align:center" [pSortableColumn]='"IsActive"'>
+            IsActive?
+            <p-sortIcon [field]="IsActive" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order"
+              ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </th>
+          <th style="text-align:center">
+            Assign UI List
+          </th>
+        </tr> -->
+          <tr>
+
+            <th>
+              <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filter($event.target.value, 'RoleName' ,'contains')"
+                style="width:100%">
+            </th>
+            <th>
+              <input type="text" pInputText size="50" placeholder="Search" (input)="dt.filter($event.target.value, 'Description' ,'contains')"
+                style="width:100%">
+            </th>
+            <th>
+
+              <!-- <p-dropdown [options]="brands" [style]="{'width':'100%'}"
+               (onChange)="dt.filter($event.value, 'IsActive', 'equals')"></p-dropdown> -->
+            </th>
+            <th>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td [pEditableColumn]="rowData" [pEditableColumnField]="rowData.RoleName" [ngClass]="rowData.RoleName == '' ? 'Error-Color' : null">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" (keyup)="onEditColumnInline($event,rowData)" [(ngModel)]="rowData.RoleName"
+                    class="text-uppercase">
+                  <span style="color: red;" *ngIf="RoleisEmpty(rowData.RoleName)" class="error">Field Can't be empty!</span>
+                </ng-template>
+
+                <ng-template pTemplate="output">
+                  {{rowData.RoleName | uppercase}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td [pEditableColumn]="rowData" [pEditableColumnField]="rowData.Description" [ngClass]="rowData.Description == '' ? 'Error-Color' : null">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <textarea rows="5" cols="20" pInputTextarea placeholder="Description" class="form-control" (keyup)="onEditColumnInline($event,rowData)"
+                    [(ngModel)]="rowData.Description">
+              </textarea>
+                  <span style="color: red;" *ngIf="DescisEmpty(rowData.Description)" class="error">Field Can't be
+                    empty!</span>
+
+                </ng-template>
+
+                <ng-template pTemplate="output">
+
+                  {{rowData.Description}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td align="center" [pEditableColumn]="rowData" [pEditableColumnField]="rowData.IsActive">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-checkbox name="IsActive" binary="true" (click)="onEditColumnInline($event,rowData)"
+                    (ngModelChange)="onEditColumnInline($event,rowData)" [(ngModel)]="rowData.IsActive"></p-checkbox>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  <p-checkbox name="IsActive" binary="true" [(ngModel)]="rowData.IsActive"></p-checkbox>
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td align="center">
+              <p-button icon="pi pi-check" (click)="selectedUIListBasedRole(rowData)"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+     
+
+    
+
+  </div>
+
+
+  <div class="card-footer">
+    <div style="float:right">
+    <button pButton type="button"  (click)="BulkUpdate(rowData)" label="Update" class="ui-button-info"
+      style="margin-right: .25em"></button>
+    <button pButton type="button" label="Cancel" (click)="GridCancel()" class="ui-button-danger"></button>
+  </div>
+</div>
+
+</div>
+
+
+<p-dialog header="Add New Role" [(visible)]="AddRolevisible" modal="modal" width="350" [responsive]="true">
+    <form class="forms_form" name="RoleForm" [formGroup]="RoleForm" (ngSubmit)="onAddRoleSubmit()">
+      <div class="forms_field">
+        <label>Role Name *</label>
+        <input type="text" placeholder="Role Name" class="form-control text-uppercase" formControlName="Role"
+          [ngClass]="{'is-invalid': RoleForm.get('Role').touched && RoleForm.get('Role').invalid }" />
+        <div class="invalid-feedback">
+          <div>Role Name is required</div>
+        </div>
+      </div>
+      <div class="forms_field">
+        <label>Description *</label>
+        <textarea rows="5" cols="30" pInputTextarea placeholder="Description" class="form-control" formControlName="Description"
+          [ngClass]="{'is-invalid': RoleForm.get('Description').touched && RoleForm.get('Description').invalid }">
+            </textarea>
+        <div *ngIf="RoleForm.get('Description').touched && RoleForm.get('Description').invalid" class="invalid-feedback">
+          <div *ngIf="RoleForm.get('Description').errors.required">Description is required</div>
+          <div *ngIf="RoleForm.get('Description').errors.maxlength">Description must be a lessthan 256 character</div>
+        </div>
+      </div>
+      <div class="forms_field">
+        <label>IsActive?</label>
+        <p-checkbox name="IsActive" binary="true" formControlName="IsActive"></p-checkbox>
+      </div>
+      <span style="color: red;" *ngIf="RoleAlreadyPresent" class="error">Role Name Already Exists</span>
+      <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix" style="text-align:right">
+          <p-button label="Save" icon="pi pi-check" styleClass="ui-button-info"></p-button>
+
+          <button type="button" pButton icon="pi pi-close" label="Cancel" class="ui-button-secondary"></button>
+        </div>
+      </p-footer>
+    </form>
+  </p-dialog>
+
+
+  <p-dialog [header]="UIListPopupHeader" [(visible)]="UIListPopup" showEffect="fade" modal="modal" [responsive]="true"
+    width="400">
+
+    <div class="ui-g-12">
+      <div class="ui-g-8">
+        <strong> <label for="vin">Ui List</label></strong>
+      </div>
+      <div class="ui-g-2">
+        <strong> <label for="vin">View</label></strong>
+      </div>
+      <div class="ui-g-2">
+        <strong> <label for="vin">Edit</label></strong>
+      </div>
+    </div>
+
+    <div class="ui-g-12" *ngFor="let UIList of UIviews.UIList">
+      <div class="ui-g-8">
+        <strong><label for="vin">{{UIList.UiName}}</label></strong>
+      </div>
+      <div class="ui-g-2">
+        <p-checkbox name="groupname" value="{{UIList.View}}" binary="true" [(ngModel)]="UIList.View"></p-checkbox>
+      </div>
+      <div class="ui-g-2">
+        <p-checkbox name="groupname" value="{{UIList.Edit}}" binary="true" [(ngModel)]="UIList.Edit"></p-checkbox>
+      </div>
+    </div>
+
+    <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+        <button type="button" pButton (click)="saveUilist(UIviews)" label="Update"></button>
+      </div>
+    </p-footer>
+  </p-dialog>
+
+
+  <p-toast [style]="{marginTop: '80px'}"></p-toast>

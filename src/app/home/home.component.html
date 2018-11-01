@@ -1,0 +1,121 @@
+<!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<!-- preloader area start -->
+
+<!-- preloader area end -->
+<!-- page container area start -->
+<div class="page-container">
+  <!-- sidebar menu area start -->
+  <div class="sidebar-menu">
+    <div class="sidebar-header">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/images/icon/logo.png" alt="logo">
+        </a>
+      </div>
+    </div>
+    <div class="main-menu">
+      <div class="menu-inner">
+        <nav>
+          <ul class="metismenu" id="menu">
+            <li class="active">
+              <a href="javascript:void(0)" aria-expanded="true">
+                <i class="ti-dashboard"></i>
+                <span>Security</span>
+              </a>
+              <ul class="collapse">
+                <li class="active">
+                  <a [routerLink]="[{ outlets: { FCS: ['Role'] } }]" routerLinkActive="active" > Role</a>
+                </li>
+                <li>
+                  <a href="index2.html"> User</a>
+                </li>
+                <li>
+                  <a href="index3.html"> Facility</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!-- sidebar menu area end -->
+  <!-- main content area start -->
+  <div class="main-content" >
+    <!-- header area start -->
+    <div class="header-area">
+      <div class="row align-items-center">
+        <!-- nav and search button -->
+        <div class="col-md-6 col-sm-8 clearfix">
+          <div class="nav-btn pull-left">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="search-box pull-left">
+            <div class="col-sm-6">
+              <div class="breadcrumbs-area clearfix">
+                <h4 class="page-title pull-left">Home</h4>
+                <ul class="breadcrumbs pull-left">
+                  <li>
+                    <a href="index.html">Home</a>
+                  </li>
+                  <li>
+                    <span>Home</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- profile info & task notification -->
+        <div class="col-md-6 col-sm-4 clearfix">
+          <div class="">
+            <div class="row align-items-center">
+              <div class="col-sm-6 clearfix">
+              </div>
+              <div class="col-sm-6 clearfix">
+                <div class=" pull-right">
+                  <!-- <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar"> -->
+                  <h4 class="user-name dropdown-toggle" style="color:black" data-toggle="dropdown">
+                    <span>{{UserName}}</span>
+                    <i class="fa fa-angle-down"></i>
+                  </h4>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Change Password</a>
+                    <a class="dropdown-item" href="#">Log Out</a>
+                  </div>
+                  <strong> Facility :</strong>
+                  <select>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- header area end -->
+    <!-- page title area start -->
+
+    <!-- page title area end -->
+    <div class="main-content-inner">
+      <!-- sales report area start -->
+
+      <router-outlet name="FCS"></router-outlet>
+
+      <!-- row area start-->
+    </div>
+  </div>
+  <!-- main content area end -->
+  <!-- footer area start-->
+  <p style="text-align: center;position: fixed;left: 0;bottom: 0;width: 100%;color: black;font-weight:bold">© Copyright
+    2018 . All right reserved</p>
+  <!-- footer area end-->
+</div>

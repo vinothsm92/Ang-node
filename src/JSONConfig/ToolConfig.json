@@ -1,0 +1,68 @@
+{
+    "User_Status": [
+        {
+            "IsApprovedByAdmin": "Approved",
+            "StatusId": "1"
+        },
+        {
+            "IsApprovedByAdmin": "Rejected",
+            "StatusId": "2"
+        }
+    ],
+    "ItemPerPage": [
+        
+        {
+            "PageCount": 25,
+            "PageID": 25
+        },
+        {
+            "PageCount": 50,
+            "PageID": 50
+        },
+        {
+            "PageCount": 100,
+            "PageID": 100
+        },
+        {
+            "PageCount": 150,
+            "PageID": 150
+        }
+    ],
+    "ProjectVersion": [
+        {
+            "VersionNumber": "V 1.0.0.3"
+        }
+    ],
+    "ProjectName": [
+        {
+            "ProjectName": "App Upgrade"
+        }
+    ],
+    "CopyRight": [
+        {
+            "CopyRight": "© 2018"
+        }
+    ],
+    "OrganizationName": [
+        {
+            "OrganizationName": "BESTIR Software Services Private Limited. All right Reserved. "
+        }
+    ],
+    "Mail": {
+        "Domains": [
+            "yahoo.com",
+            "yahoo.in",
+            "gmail.com",
+            "bestirtech.com"
+        ]
+    },
+    "EmailSubjects": [
+        {
+            "RegisterMail": "Registration confirmation for Sales Tracker",
+            "AdminMailForNewUser": "Sales Tracker - New user Registration ",
+            "ForgotPassword": "Sales Tracker password recovery",
+            "RejectMail": "Your registeration has been Rejected by Sales Tracker",
+            "ApprovalMail": "Approval confirmation for Sales Tracker"
+        }
+    ]
+}
